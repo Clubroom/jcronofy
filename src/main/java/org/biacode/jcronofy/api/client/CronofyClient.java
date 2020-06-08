@@ -141,4 +141,20 @@ public interface CronofyClient {
      * @return the cronofy response
      */
     CronofyResponse<AvailabilityResponse> availability(final AvailabilityRequest request);
+
+    /**
+     * Element Token
+     * 
+     * @param request the request
+     * @return the cronofy response
+     */
+    CronofyResponse<ElementTokenResponse> getElementToken(final ElementTokenRequest request);
+
+    /**
+     * Available Periods
+     * 
+     * @param request the request
+     * @return the cronofy response
+     */
+    CronofyResponse<AvailablePeriodsResponse> availablePeriods(final AvailablePeriodsRequest request);
 }
