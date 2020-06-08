@@ -17,6 +17,9 @@ public class AvailablePeriodModel implements Serializable {
     private static final long serialVersionUID = -2515145833874002461L;
 
     //region Properties
+    @JsonProperty("available_period_id")
+    private String availablePeriodId;
+
     @JsonProperty("start")
     private String start;
 
@@ -37,7 +40,8 @@ public class AvailablePeriodModel implements Serializable {
         this.end = end;
     }
 
-    public AvailablePeriodModel(final String start, final String end, final List<ParticipantModel> participants) {
+    public AvailablePeriodModel(final String availablePeriodId, final String start, final String end, final List<ParticipantModel> participants) {
+        this.availablePeriodId = availablePeriodId;
         this.start = start;
         this.end = end;
         this.participants = participants;
@@ -55,6 +59,7 @@ public class AvailablePeriodModel implements Serializable {
         }
         final AvailablePeriodModel that = (AvailablePeriodModel) o;
         return new EqualsBuilder()
+                .append(availablePeriodId, that.availablePeriodId)
                 .append(start, that.start)
                 .append(end, that.end)
                 .append(participants, that.participants)
@@ -64,6 +69,7 @@ public class AvailablePeriodModel implements Serializable {
     @Override
     public int hashCode() {
         return new HashCodeBuilder()
+                .append(availablePeriodId)
                 .append(start)
                 .append(end)
                 .append(participants)
@@ -74,6 +80,7 @@ public class AvailablePeriodModel implements Serializable {
     public String toString() {
         return new ToStringBuilder(this)
                 .appendSuper(super.toString())
+                .append("availablePeriodId", availablePeriodId)
                 .append("start", start)
                 .append("end", end)
                 .append("participants", participants)
