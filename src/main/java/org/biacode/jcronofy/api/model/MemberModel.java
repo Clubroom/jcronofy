@@ -27,6 +27,12 @@ public class MemberModel implements Serializable {
 
     @JsonProperty("calendar_ids")
     private String[] calendarIds;
+
+    @JsonProperty("managed_availability")
+    private Boolean managedAvailability;
+
+    @JsonProperty("availability_rule_ids")
+    private List<String> availabilityRuleIds;
     //endregion
 
     //region Constructors
@@ -36,6 +42,11 @@ public class MemberModel implements Serializable {
 
     public MemberModel(final String sub) {
         this.sub = sub;
+    }
+
+    public MemberModel(final String sub, final Boolean managedAvailabilty) {
+        this.sub = sub;
+        this.managedAvailability = managedAvailabilty;
     }
 
     public MemberModel(final String sub, final List<AvailablePeriodModel> availablePeriods) {
@@ -69,6 +80,8 @@ public class MemberModel implements Serializable {
                 .append(sub, that.sub)
                 .append(availablePeriods, that.availablePeriods)
                 .append(calendarIds, that.calendarIds)
+                .append(managedAvailability, that.managedAvailability)
+                .append(availabilityRuleIds, that.availabilityRuleIds)
                 .isEquals();
     }
 
@@ -78,6 +91,8 @@ public class MemberModel implements Serializable {
                 .append(sub)
                 .append(availablePeriods)
                 .append(calendarIds)
+                .append(managedAvailability)
+                .append(availabilityRuleIds)
                 .toHashCode();
     }
 
@@ -88,6 +103,8 @@ public class MemberModel implements Serializable {
                 .append("sub", sub)
                 .append("availablePeriods", availablePeriods)
                 .append("calendarIds", calendarIds)
+                .append("managedAvailability", managedAvailability)
+                .append("availabilityRuleIds", availabilityRuleIds)
                 .toString();
     }
     //endregion
@@ -115,6 +132,22 @@ public class MemberModel implements Serializable {
 
     public void setCalendarIds(final String[] calendarIds) {
         this.calendarIds = calendarIds;
+    }
+
+    public Boolean getManagedAvailability() {
+        return managedAvailability;
+    }
+
+    public void setManagedAvailability(Boolean managedAvailability) {
+        this.managedAvailability = managedAvailability;
+    }
+
+    public List<String> getAvailabilityRuleIds() {
+        return availabilityRuleIds;
+    }
+
+    public void setAvailabilityRuleIds(List<String> availabilityRuleIds) {
+        this.availabilityRuleIds = availabilityRuleIds;
     }
     //endregion
 }
