@@ -51,7 +51,11 @@ public class CronofyClientImpl extends AbstractCronofyClient implements CronofyC
 
     private static final String EVENTS_PATH = "events";
 
+    private static final String ELEMENT_TOKENS_PATH = "element_tokens";
+
     private static final String AVAILABILITY_PATH = "availability";
+
+    private static final String AVAILABLE_PERIODS = "available_periods";
 
     private static final String OAUTH_PATH = "oauth";
 
@@ -481,6 +485,52 @@ public class CronofyClientImpl extends AbstractCronofyClient implements CronofyC
             return new CronofyResponse<>(ErrorTypeModel.UNPROCESSABLE);
         }
     }
+
+    @Override
+    public CronofyResponse<ElementTokenResponse> getElementToken(final ElementTokenRequest request) {
+        assertCronofyRequest(request);
+        try {
+            return getClient()
+                    .target(basePath)
+                    .path(API_VERSION)
+                    .path(ELEMENT_TOKENS_PATH)
+                    .request(MediaType.APPLICATION_JSON_TYPE)
+                    .header(AUTH_HEADER_KEY, getAccessTokenFromRequest(request))
+                    .post(Entity.entity(request, MediaType.APPLICATION_JSON_TYPE),
+                            new GenericType<CronofyResponse<ElementTokenResponse>>() {
+                            });
+        } catch (final NotAuthorizedException ex) {
+            LOGGER.warn(NOT_AUTHORIZED_EXCEPTION_MSG, ex, request);
+            return new CronofyResponse<>(ErrorTypeModel.NOT_AUTHORIZED);
+        } catch (final ClientErrorException ex) {
+            LOGGER.warn(CLIENT_ERROR_EXCEPTION_MSG, ex, request);
+            return new CronofyResponse<>(ErrorTypeModel.UNPROCESSABLE);
+        }
+    }
+
+    @Override
+    public CronofyResponse<AvailablePeriodsResponse> availablePeriods(final AvailablePeriodsRequest request) {
+        assertCronofyRequest(request);
+        try {
+            return getClient()
+                    .target(basePath)
+                    .path(API_VERSION)
+                    .path(AVAILABLE_PERIODS)
+                    .queryParam("from", getQueryParamFromDate(request.getFrom(), START_DATE_DAY_OFFSET))
+                    .queryParam("to", getQueryParamFromDate(request.getTo(), END_DATE_DAY_OFFSET))
+                    .queryParam("tzid", request.getTzId())
+                    .request(MediaType.APPLICATION_JSON_TYPE)
+                    .header(AUTH_HEADER_KEY, getAccessTokenFromRequest(request))
+                    .get(new GenericType<CronofyResponse<AvailablePeriodsResponse>>() {});
+        } catch (final NotAuthorizedException ex) {
+            LOGGER.warn(NOT_AUTHORIZED_EXCEPTION_MSG, ex, request);
+            return new CronofyResponse<>(ErrorTypeModel.NOT_AUTHORIZED);
+        } catch (final ClientErrorException ex) {
+            LOGGER.warn(CLIENT_ERROR_EXCEPTION_MSG, ex, request);
+            return new CronofyResponse<>(ErrorTypeModel.UNPROCESSABLE);
+        }
+    }
+
     //endregion
 
     //region Utility methods
