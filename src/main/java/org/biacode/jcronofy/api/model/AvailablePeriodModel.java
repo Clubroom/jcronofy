@@ -40,6 +40,18 @@ public class AvailablePeriodModel implements Serializable {
         this.end = end;
     }
 
+    public AvailablePeriodModel(final String availablePeriodId, final String start, final String end) {
+        this.availablePeriodId = availablePeriodId;
+        this.start = start;
+        this.end = end;
+    }
+
+    public AvailablePeriodModel(final String start, final String end, final List<ParticipantModel> participants) {
+        this.start = start;
+        this.end = end;
+        this.participants = participants;
+    }
+
     public AvailablePeriodModel(final String availablePeriodId, final String start, final String end, final List<ParticipantModel> participants) {
         this.availablePeriodId = availablePeriodId;
         this.start = start;
