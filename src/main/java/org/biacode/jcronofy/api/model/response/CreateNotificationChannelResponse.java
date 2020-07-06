@@ -16,7 +16,6 @@ public class CreateNotificationChannelResponse extends AbstractCronofyResponse {
     private static final long serialVersionUID = -6821995995544755246L;
 
     //region Properties
-    @JsonUnwrapped
     private ChannelModel channel;
     //endregion
 
