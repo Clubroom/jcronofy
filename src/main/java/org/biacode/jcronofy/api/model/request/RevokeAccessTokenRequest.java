@@ -21,8 +21,13 @@ public class RevokeAccessTokenRequest extends AbstractCronofyRequest {
     @JsonProperty("client_secret")
     private String clientSecret;
 
+    @JsonInclude(Include.NON_NULL)
     @JsonProperty("token")
     private String token;
+
+    @JsonInclude(Include.NON_NULL)
+    @JsonProperty("sub")
+    private String sub;
     //endregion
 
     //region Constructors
@@ -31,10 +36,12 @@ public class RevokeAccessTokenRequest extends AbstractCronofyRequest {
 
     public RevokeAccessTokenRequest(final String clientId,
                                     final String clientSecret,
-                                    final String token) {
+                                    final String token,
+                                    final String sub) {
         this.clientId = clientId;
         this.clientSecret = clientSecret;
         this.token = token;
+        this.sub = sub;
     }
     //endregion
 
@@ -52,6 +59,7 @@ public class RevokeAccessTokenRequest extends AbstractCronofyRequest {
                 .append(clientId, that.clientId)
                 .append(clientSecret, that.clientSecret)
                 .append(token, that.token)
+                .append(sub, that.sub)
                 .isEquals();
     }
 
@@ -61,6 +69,7 @@ public class RevokeAccessTokenRequest extends AbstractCronofyRequest {
                 .append(clientId)
                 .append(clientSecret)
                 .append(token)
+                .append(sub)
                 .toHashCode();
     }
 
@@ -70,6 +79,7 @@ public class RevokeAccessTokenRequest extends AbstractCronofyRequest {
                 .append("clientId", clientId)
                 .append("clientSecret", clientSecret)
                 .append("token", token)
+                .append("sub", sub)
                 .toString();
     }
     //endregion
@@ -97,6 +107,14 @@ public class RevokeAccessTokenRequest extends AbstractCronofyRequest {
 
     public void setToken(final String token) {
         this.token = token;
+    }
+
+    public String getSub() {
+        return sub;
+    }
+
+    public void setSub(final String sub) {
+        this.sub = sub;
     }
     //endregion
 }
