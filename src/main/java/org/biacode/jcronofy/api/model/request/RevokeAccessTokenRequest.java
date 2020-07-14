@@ -12,6 +12,7 @@ import org.biacode.jcronofy.api.model.common.AbstractCronofyRequest;
  * Date: 10/4/16
  * Time: 4:30 PM
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class RevokeAccessTokenRequest extends AbstractCronofyRequest {
     private static final long serialVersionUID = 6951953066705450267L;
 
@@ -22,11 +23,9 @@ public class RevokeAccessTokenRequest extends AbstractCronofyRequest {
     @JsonProperty("client_secret")
     private String clientSecret;
 
-    @JsonInclude(Include.NON_NULL)
     @JsonProperty("token")
     private String token;
 
-    @JsonInclude(Include.NON_NULL)
     @JsonProperty("sub")
     private String sub;
     //endregion
