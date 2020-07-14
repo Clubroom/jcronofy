@@ -175,7 +175,8 @@ public final class CronofyUnitTestHelper {
         return new RevokeAccessTokenRequest(
                 UUID.randomUUID().toString(),
                 UUID.randomUUID().toString(),
-                UUID.randomUUID().toString()
+                UUID.randomUUID().toString(),
+                null
         );
     }
 
