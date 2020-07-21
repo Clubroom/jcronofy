@@ -13,7 +13,11 @@ public enum NotificationTypeModel {
     @JsonProperty("change")
     CHANGE("change"),
     @JsonProperty("profile_disconnected")
-    PROFILE_DISCONNECTED("profile_disconnected");
+    PROFILE_DISCONNECTED("profile_disconnected"),
+    @JsonProperty("profile_initial_sync_completed")
+    PROFILE_INITIAL_SYNC_COMPLETED("profile_initial_sync_completed"),
+    @JsonProperty("gdpr_requested")
+    GDPR_REQUESTED("gdpr_requested");
 
     String type;
 
