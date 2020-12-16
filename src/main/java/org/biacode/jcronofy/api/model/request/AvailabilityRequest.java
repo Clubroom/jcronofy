@@ -20,6 +20,9 @@ public class AvailabilityRequest extends AbstractAccessTokenAwareCronofyRequest 
     private static final long serialVersionUID = -6939300839527935872L;
 
     //region Properties
+    @JsonProperty("response_format")
+    private String responseFormat;
+
     @JsonProperty("participants")
     private List<ParticipantModel> participants;
 
@@ -36,11 +39,13 @@ public class AvailabilityRequest extends AbstractAccessTokenAwareCronofyRequest 
 
     public AvailabilityRequest(final String accessToken, final List<ParticipantModel> participants) {
         super(accessToken);
+        this.responseFormat = "periods";
         this.participants = participants;
     }
 
     public AvailabilityRequest(final String accessToken, final List<ParticipantModel> participants, final RequiredDurationModel requiredDuration, final List<AvailablePeriodModel> availablePeriods) {
         super(accessToken);
+        this.responseFormat = "periods";
         this.participants = participants;
         this.requiredDuration = requiredDuration;
         this.availablePeriods = availablePeriods;
@@ -59,6 +64,7 @@ public class AvailabilityRequest extends AbstractAccessTokenAwareCronofyRequest 
         final AvailabilityRequest that = (AvailabilityRequest) o;
         return new EqualsBuilder()
                 .appendSuper(super.equals(o))
+                .append(responseFormat, that.responseFormat)
                 .append(participants, that.participants)
                 .append(requiredDuration, that.requiredDuration)
                 .append(availablePeriods, that.availablePeriods)
@@ -69,6 +75,7 @@ public class AvailabilityRequest extends AbstractAccessTokenAwareCronofyRequest 
     public int hashCode() {
         return new HashCodeBuilder()
                 .appendSuper(super.hashCode())
+                .append(responseFormat)
                 .append(participants)
                 .append(requiredDuration)
                 .append(availablePeriods)
@@ -79,6 +86,7 @@ public class AvailabilityRequest extends AbstractAccessTokenAwareCronofyRequest 
     public String toString() {
         return new ToStringBuilder(this)
                 .appendSuper(super.toString())
+                .append("responseFormat", responseFormat)
                 .append("participants", participants)
                 .append("requiredDuration", requiredDuration)
                 .append("availablePeriods", availablePeriods)
@@ -87,6 +95,14 @@ public class AvailabilityRequest extends AbstractAccessTokenAwareCronofyRequest 
     //endregion
 
     //region Properties getters and setters
+    public String getResponseFormat() {
+        return responseFormat;
+    }
+    
+    public void setResponseFormat(String responseFormat) {
+        this.responseFormat = responseFormat;
+    }
+
     public RequiredDurationModel getRequiredDuration() {
         return requiredDuration;
     }
