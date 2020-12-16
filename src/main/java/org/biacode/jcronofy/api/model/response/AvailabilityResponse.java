@@ -20,6 +20,9 @@ public class AvailabilityResponse extends AbstractCronofyResponse {
     //region Properties
     @JsonProperty("available_periods")
     private List<AvailablePeriodModel> availablePeriods;
+
+    @JsonProperty("available_slots")
+    private List<AvailablePeriodModel> availableSlots;
     //endregion
 
     //region Constructors
@@ -44,6 +47,7 @@ public class AvailabilityResponse extends AbstractCronofyResponse {
         final AvailabilityResponse that = (AvailabilityResponse) o;
         return new EqualsBuilder()
                 .append(availablePeriods, that.availablePeriods)
+                .append(availableSlots, that.availableSlots)
                 .isEquals();
     }
 
@@ -51,6 +55,7 @@ public class AvailabilityResponse extends AbstractCronofyResponse {
     public int hashCode() {
         return new HashCodeBuilder()
                 .append(availablePeriods)
+                .append(availableSlots)
                 .toHashCode();
     }
 
@@ -59,6 +64,7 @@ public class AvailabilityResponse extends AbstractCronofyResponse {
         return new ToStringBuilder(this)
                 .appendSuper(super.toString())
                 .append("availablePeriods", availablePeriods)
+                .append("availableSlots", availableSlots)
                 .toString();
     }
     //endregion
@@ -70,6 +76,14 @@ public class AvailabilityResponse extends AbstractCronofyResponse {
 
     public void setAvailablePeriods(final List<AvailablePeriodModel> availablePeriods) {
         this.availablePeriods = availablePeriods;
+    }
+
+    public List<AvailablePeriodModel> getAvailableSlots() {
+        return availableSlots;
+    }
+
+    public void setAvailableSlots(final List<AvailablePeriodModel> availableSlots) {
+        this.availableSlots = availableSlots;
     }
     //endregion
 }
